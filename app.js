@@ -3,10 +3,6 @@ const formSearch = document.querySelector(".form-search");
 const todosContainer = document.querySelector(".todos-container");
 const pForWarning = document.createElement("p");
 
-Array.from(todosContainer.children).forEach((element) => {
-  element.innerHTML += `<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">`;
-});
-
 const objctForW = {
   paragraph: pForWarning,
   text: "É preciso o minimo de 5 caracteres!",
@@ -24,7 +20,6 @@ const forTheWarning = (greatObject) => {
 const addTodo = (inputValue, e) => {
   if (inputValue.length >= 5) {
     todosContainer.innerHTML += `<li class="list-group-item bg-transparent d-flex justify-content-between align-items-center" data-todo="${inputValue}">
-    <input class="form-check-input" type="checkbox" id="flexCheckDefault">
     <span class='todoMargemLefet'>${inputValue}</span>
     <i class="far fa-trash-alt" data-trash="${inputValue}"></i>
     </li>`;
@@ -38,7 +33,7 @@ formAddTodo.addEventListener("submit", e => {
   e.preventDefault();
   const inputValue = e.target.add.value.trim();
   addTodo(inputValue, e)
-  ;
+    ;
 });
 
 formAddTodo.addEventListener("input", (e) => {
@@ -47,26 +42,22 @@ formAddTodo.addEventListener("input", (e) => {
   }
 });
 
-const removeTodo = (inputValue) =>  {
-      const trashDataValue = inputValue.dataset.trash
-      const todo = document.querySelector(`[data-todo="${trashDataValue}"]`)
-      
-      if(trashDataValue) {
-        todo.remove()
-      }}
+const removeTodo = (inputValue) => {
+  const trashDataValue = inputValue.dataset.trash
+  const todo = document.querySelector(`[data-todo="${trashDataValue}"]`)
+
+  if (trashDataValue) {
+    todo.remove()
+  }
+}
 
 todosContainer.addEventListener("click", (e) => {
   const inputValue = e.target;
   removeTodo(inputValue)
-
-  if (Array.from(inputValue.classList).includes("form-check-input")) {
-    inputValue.parentElement.classList.toggle("tarefaCumprida");
-    inputValue.toggleAttribute("checked");
-  }
 });
 
 const filterTodos = (todos, inputValue, returnMatchTodos) => todos
-.filter((element) => {
+  .filter((element) => {
     const matchTodos = element.textContent.toLowerCase().includes(inputValue)
     return returnMatchTodos ? matchTodos : !matchTodos
   })
@@ -79,8 +70,8 @@ const manipulateClasses = (todos, classToAdd, classToRemove) => {
 }
 
 const hideTodos = (todos, inputValue) => {
-const todosHideTodos = filterTodos(todos, inputValue, false)
-manipulateClasses(todosHideTodos, 'hidden', 'd-flex')
+  const todosHideTodos = filterTodos(todos, inputValue, false)
+  manipulateClasses(todosHideTodos, 'hidden', 'd-flex')
 }
 
 const showTodos = (todos, inputValue) => {
